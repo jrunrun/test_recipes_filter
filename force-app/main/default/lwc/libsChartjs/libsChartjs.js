@@ -74,7 +74,7 @@ export default class LibsChartjs extends LightningElement {
              
             height: "800px",
             width: "800px",
-            onFirstInteractive: this.defaultOnFirstInteractive()
+            onFirstInteractive: this.defaultOnFirstInteractive.bind(this)
   
             // onFirstInteractive: () => {
             
@@ -167,7 +167,7 @@ export default class LibsChartjs extends LightningElement {
     // }
 
     async defaultOnFirstInteractive() {
-       
+        console.log('defaultOnFirstInteractive')
         // tabfilters
         await this.filters.discovery(this.viz);
       
@@ -177,6 +177,10 @@ export default class LibsChartjs extends LightningElement {
     
         console.log('init Viz!');
         this.containerDiv = this.template.querySelector('[data-id="tableauViz"]');
+        console.log({
+            view_url: this.view_url,
+            viz_options: this.viz_options
+        })
         this.viz = new tableau.Viz(this.containerDiv, this.view_url, this.viz_options);
         
     }
